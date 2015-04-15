@@ -19,8 +19,7 @@ var Parent = Class(
 		'a': 0
 	}
 
-}
-).build();
+}).build();
 
 var Child = Class(
 {
