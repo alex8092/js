@@ -11,7 +11,7 @@ An example is better than a long speech :)
 var Parent = Class(
 {
 	
-	init: function (a) {
+	initialize: function (a) {
 		this.a = a;
 	},
 
@@ -23,7 +23,7 @@ var Parent = Class(
 
 var Child = Class(
 {
-	init: function (a, b) {
+	initialize: function (a, b) {
 		this.$Parent(a);
 		this.b = b;
 	},
@@ -36,7 +36,7 @@ var Child = Class(
 
 var Child2 = Class(
 {
-	init: function (a, b, c) {
+	initialize: function (a, b, c) {
 		this.$Child(a, b);
 		this.c = c;
 	},
