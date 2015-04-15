@@ -14,6 +14,34 @@ var Class = (function generate() {
 
 	ClassBuilder.prototype.number = function (name, get, set) {
 		this.__obj.prototype[name] = 0;
+		this._generate_set_get(name, get, set);
+		return this;
+	}
+
+	ClassBuilder.prototype.string = function (name, get, set) {
+		this.__obj.prototype[name] = '';
+		this._generate_set_get(name, get, set);
+		return this;
+	}
+
+	ClassBuilder.prototype.array = function (name, get, set) {
+		this.__obj.prototype[name] = [];
+		this._generate_set_get(name, get, set);
+		return this;
+	}
+
+	ClassBuilder.prototype.object = function (name, get, set) {
+		this.__obj.prototype[name] = {};
+		this._generate_set_get(name, get, set);
+		return this;
+	}
+
+	ClassBuilder.prototype.function = function(name, func) {
+		this.__obj.prototype[name] = func;
+		return this;
+	}
+	
+	ClassBuilder.prototype._generate_set_get = function (name, get, set) {
 		if (get || set) {
 			var namemix = name[0].toUpperCase() + name.substring(1);
 			if (get)
@@ -21,27 +49,6 @@ var Class = (function generate() {
 			if (set)
 				this.__obj.prototype['set'+namemix] = Function ('value', 'this.'+name+'=value;');
 		}
-		return this;
-	}
-
-	ClassBuilder.prototype.string = function (name) {
-		this.__obj.prototype[name] = '';
-		return this;
-	}
-
-	ClassBuilder.prototype.array = function (name) {
-		this.__obj.prototype[name] = [];
-		return this;
-	}
-
-	ClassBuilder.prototype.object = function (name) {
-		this.__obj.prototype[name] = {};
-		return this;
-	}
-
-	ClassBuilder.prototype.function = function(name, func) {
-		this.__obj.prototype[name] = func;
-		return this;
 	}
 
 	ClassBuilder.prototype._generate = function () {
