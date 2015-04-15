@@ -1,6 +1,6 @@
 var Class = (function generate() {
 	var ClassBuilder = function (obj) {
-		this.__obj = obj.init;
+		this.__obj = obj.initialize;
 		this.__objbuild = obj;
 		this.__extends_name = '';
 		this.__extends_obj = {};
