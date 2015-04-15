@@ -1,4 +1,3 @@
-//require('pmx').init();
 var Parent = Class(
 {
 	
