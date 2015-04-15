@@ -1,32 +1,56 @@
-var Parent = Class(function (a) {
-	this.a = a;
-})
-	.number('a', true, true)
-	.build();
+//require('pmx').init();
+var Parent = Class(
+{
+	
+	init: function (a) {
+		this.a = a;
+	},
 
-var Child = Class(function (a, b) {
-	this.$Parent(a);
-	this.b = b;
-})
-	.extend('Parent', Parent)
-	.number('b', true)
-	.build();
+	attributes: {
+		'a': 0
+	}
 
-var Child2 = Class(function (a, b, c) {
-	this.$Child(a, b);
-	this.c = c;
-})
-	.extend('Child', Child)
-	.number('c', true)
-	.function('getA', function () {
-		return 1 + this.$Child_getA();
-	})
-	.build();
+}
+).build();
+
+var Child = Class(
+{
+	init: function (a, b) {
+		this.$Parent(a);
+		this.b = b;
+	},
+
+	attributes: {
+		'b': 0
+	}
+
+}).extend('Parent', Parent).build();
+
+var Child2 = Class(
+{
+	init: function (a, b, c) {
+		this.$Child(a, b);
+		this.c = c;
+	},
+
+	attributes: {
+		'c': 0
+	},
+
+	functions: {
+		'getA': function () {
+			return 1 + this.$Child_getA();
+		}
+	}
+
+}).extend('Child', Child).build();
 
 var p = new Child2(1, 2, 3);
 console.log(p.getA());
 console.log(p.getB());
 console.log(p.getC());
+if (p instanceof Parent)
+	console.log('win');
 
 var t1 = new Date().getTime();
 
@@ -40,3 +64,4 @@ for (var i = 0; i < 40000000; ++i) {
 var t2 = new Date().getTime();
 var t3 = t2 - t1;
 console.log('time: ' + t3);
+
